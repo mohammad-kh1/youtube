@@ -4,7 +4,7 @@ import NavLayout from "@/Layouts/NavLayout.vue";
 import ThumbUpOutline from "vue-material-design-icons/ThumbUpOutline.vue";
 import ThumbDownOutline from "vue-material-design-icons/ThumbDownOutline.vue";
 import CheckCircel from "vue-material-design-icons/CheckCircle.vue";
-
+import RecommendedVideos from "@/Components/RecommendedVideos.vue";
 // defineProps({
 //   canLogin: {
 //     type: Boolean,
@@ -71,16 +71,30 @@ import CheckCircel from "vue-material-design-icons/CheckCircle.vue";
                 Obcaecati rerum nostrum perspiciatis ullam cupiditate est quod,
                 tenetur laborum qui nulla iusto tempora eos voluptatum tempore,
                 velit culpa reiciendis voluptatibus deserunt?
-                
               </div>
-              <div class="mt-4 flex items-center ">
+              <div class="mt-4 flex items-center">
                 <ThumbUpOutline fillColor="#FFFFFF" :size="20" class="pr-2" />
-                <div class="text-gray-400 text-sm font-extrabold pr-10">{{ (Math.random() * 100).toFixed(0) }}</div>
+                <div class="text-gray-400 text-sm font-extrabold pr-10">
+                  {{ (Math.random() * 100).toFixed(0) }}
+                </div>
                 <ThumbDownOutline fillColor="#FFFFFF" :size="20" />
                 <div class="text-gray-400 pl-3">10</div>
               </div>
             </div>
           </div>
+        </div>
+      </div>
+      <div class="w-[500px] p-3 sm:block ">
+        <div class="flex mb-3">
+          <RecommendedVideos
+            :vid="{
+              title: 'py 1',
+              video: '/videos/vi.mp4',
+              thumbnail: '/videos/thumbnail/vi.png',
+              user: 'Mic',
+              views: '20k views - 2 days asgo',
+            }"
+          />
         </div>
       </div>
     </div>

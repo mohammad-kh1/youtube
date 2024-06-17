@@ -1,35 +1,28 @@
 <script setup>
-import { Head, Link } from '@inertiajs/vue3';
+import { Head, Link } from "@inertiajs/vue3";
 import NavLayout from "@/Layouts/NavLayout.vue";
+import VideoCard from "@/Components/VideoCard.vue";
 
-defineProps({
-    canLogin: {
-        type: Boolean,
-    },
-    canRegister: {
-        type: Boolean,
-    },
-    laravelVersion: {
-        type: String,
-        required: true,
-    },
-    phpVersion: {
-        type: String,
-        required: true,
-    },
-});
+// defineProps({
+//   canLogin: {
+//     type: Boolean,
+//   },
+// });
 
-function handleImageError() {
-    document.getElementById('screenshot-container')?.classList.add('!hidden');
-    document.getElementById('docs-card')?.classList.add('!row-span-1');
-    document.getElementById('docs-card-content')?.classList.add('!flex-row');
-    document.getElementById('background')?.classList.add('!hidden');
-}
 </script>
 
 <template>
-    <Head title="Youtube" />
-   <NavLayout>
-    s2
-   </NavLayout>
+  <Head title="Youtube" />
+  <NavLayout> 
+    <div class="grid 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2">
+      <VideoCard 
+        title="SEA"
+        user="Jhon"
+        views="100k - 3 days ago"
+        image="https://picsum.photos/200/300"
+        videoUrl="/videos/vi.mp4"
+        thumbnail="/videos/thumbnail/vi.png"
+      ></VideoCard>
+    </div>
+  </NavLayout>
 </template>

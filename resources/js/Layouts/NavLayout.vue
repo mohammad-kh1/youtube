@@ -13,7 +13,7 @@ let openSideNav = ref(true);
   <div class="relative">
     <div
       id="TopNav"
-      class="w-[100%] h-[60px] fixed bg-black z-20 flex items-center justify-between"
+      class="w-[100%] h-[60px] fixed bg-black z-20 flex items-center justify-between "
     >
       <div class="flex items-center">
         <button
@@ -24,7 +24,7 @@ let openSideNav = ref(true);
         </button>
         <div class="mx-2"></div>
         <div
-          class="flex font-extrabold text-white items-center justify-center mr-10 cursor-pointer"
+          class="flex text-white items-center justify-center mr-10 cursor-pointer"
         >
           YouTube
         </div>
@@ -40,7 +40,7 @@ let openSideNav = ref(true);
         </div>
         <div>
           <img
-            class="rounded-full mx-8"
+            class="rounded-full mx-8 "
             width="35"
             src="https://randomuser.me/api/portraits/men/81.jpg"
           />
@@ -79,8 +79,24 @@ let openSideNav = ref(true);
       </ul>
     </div>
 
-    <div id="SideNavOverlay"></div>
+    <div id="SideNavOverlay">
 
-    <slot />
+    </div>
+    <div
+      class="w-[100%] h-[calc(100vh-60px)] absolute right-0 top-[60px]"
+      :class="{
+        'w-[calc(100%-70px)]': !openSideNav,
+        'w-[calc(100%-240px)]': openSideNav,
+      }"
+    >
+      <slot />
+    </div>
+
   </div>
 </template>
+
+<style>
+body {
+  background-color: black;
+}
+</style>

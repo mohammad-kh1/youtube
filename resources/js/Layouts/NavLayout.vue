@@ -39,9 +39,7 @@ const isNavOverlay = () => {
   if (usePage().url === "/delete-video") {
     openSideNavOverlay.value = !openSideNavOverlay.value;
   }
-  if (usePage().url === "/videos/1") {
-    openSideNavOverlay.value = !openSideNavOverlay.value;
-  }
+
   if (width.value < 640) {
     openSideNavOverlay.value = !openSideNavOverlay.value;
   }
@@ -69,11 +67,13 @@ const isNavOverlay = () => {
           <MenuIcon fillColor="#FFFFFF" :size="26" />
         </button>
         <div class="mx-2"></div>
-        <div
+        <Link
+          :href="route('home')"
           class="flex text-white items-center justify-center mr-10 cursor-pointer"
         >
-          YouTube
-        </div>
+          <img src="/images/YT-logo.png" width="32" alt="" />
+          <img src="/images/YT-logo-text.png" width="62" alt="" />
+        </Link>
       </div>
       <div class="w-[600px] md:block hidden">
         <div class="rounded-full flex items-center bg-[#222222]">
@@ -130,7 +130,7 @@ const isNavOverlay = () => {
       <div
         v-if="$page.url === '/'"
         id="SideNav"
-        class="h-[100%] fixed z-0 bg-black w-[240px]"
+        class="h-[100%] fixed z-0 bg-black"
         :class="[!openSideNav ? 'w-[70px] ' : 'w-[240px]']"
       >
         <ul
@@ -190,11 +190,12 @@ const isNavOverlay = () => {
             <MenuIcon fillColor="#FFFFFF" :size="26" />
           </button>
           <div class="mx-2"></div>
-          <div
+          <Link :href="route('home')"
             class="flex text-white items-center justify-center mr-10 cursor-pointer"
           >
-            YouTube
-          </div>
+            <img src="/images/YT-logo.png" width="32" alt="" />
+            <img src="/images/YT-logo-text.png" width="62" alt="" />
+          </Link>
         </div>
         <ul class="w-full px-5 py-2 p-2 mt-2">
           <SideNavItem :openSideNav="true" iconString="Home" />

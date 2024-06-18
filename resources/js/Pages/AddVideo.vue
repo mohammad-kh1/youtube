@@ -18,7 +18,7 @@ import NavLayout from "@/Layouts/NavLayout.vue";
           <div class="text-gray-200">Title</div>
           <input
             type="text"
-            class="form-control block w-full px-5 py-1.5 text-xl font-normal text-gray-200 bg-black placeholder-gray-400 bg-clip-padding border border-solid border-gray-600 ease-in-out m-0 border-transparent focus:ring-0"
+            class="form-control block w-full px-5 py-1.5 text-xl border border-solid border-white font-normal text-gray-200 bg-black placeholder-gray-400 bg-clip-padding  ease-in-out m-0 border-transparent focus:ring-0"
             placeholder="My Video"
           />
           <span class="text-red-500">This is an error</span>

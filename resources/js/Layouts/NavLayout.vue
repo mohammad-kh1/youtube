@@ -9,7 +9,7 @@ const openSideNav = ref(true);
 const openSideNavOverlay = ref(false);
 const sideNavOverlay = ref(null);
 const width = ref(document.documentElement.clientWidth);
-
+const profile = ref(false);
 const resize = () => {
   if (width.value < 1280 && openSideNav.value) {
     openSideNav.value = false;
@@ -85,12 +85,35 @@ const isNavOverlay = () => {
           <MagnifyIcon class="mx-6" fillColor="#FFFFFF" :size="23" />
         </div>
       </div>
-      <div>
+
+      <div class="" v-if="$page.props.auth.user">
         <img
-          class="rounded-full mx-8"
+          @click="profile = !profile"
+          class="rounded-full cursor-pointer"
+          :class="[profile ? 'mx-20 mt-20' : 'mx-8']"
           width="35"
           src="https://randomuser.me/api/portraits/men/81.jpg"
         />
+        <div
+          class="text-white border-double p-2 w-[100%] mt-3 bg-[#717171] z-100 rounded-lg"
+          v-if="profile"
+        >
+          <h1>Username</h1>
+          <div class="border-b"></div>
+          <button
+            class="text-white mb-2  font-bold mt-2 rounded cursor-pointer"
+            type="submit"
+          >
+            Language
+          </button>
+          <div class="border-b"></div>
+          <Link v-if="$page.props.auth.user" href="/logout" method="post" as="button" type="button"
+            >Logout</Link
+          >
+        </div>
+      </div>
+      <div v-else class="text-white mx-8">
+        <Link :href="route('login')" as="button" type="button">Login</Link>
       </div>
     </div>
     <div
@@ -103,15 +126,21 @@ const isNavOverlay = () => {
         :class="[!openSideNav ? 'p-2' : 'px-5 pb-2 pt-[7px]']"
         class="mt-[60px] w-full"
       >
-        <SideNavItem :openSideNav="openSideNav" iconString="Home" />
-        <SideNavItem :openSideNav="openSideNav" iconString="Add Video" />
-        <SideNavItem :openSideNav="openSideNav" iconString="Delete Video" />
+        <Link :href="route('home')">
+          <SideNavItem :openSideNav="openSideNav" iconString="Home" />
+        </Link>
+        <Link :href="route('addVideo')">
+          <SideNavItem v-if="$page.props.auth.user" :openSideNav="openSideNav" iconString="Add Video" />
+        </Link>
+        <Link :href="route('deleteVideo')">
+          <SideNavItem v-if="$page.props.auth.user" :openSideNav="openSideNav" iconString="Delete Video" />
+        </Link>
         <div class="border-b border-b-gray-700 my-2.5"></div>
-        <SideNavItem :openSideNav="openSideNav" iconString="Subscription" />
-        <SideNavItem :openSideNav="openSideNav" iconString="Library" />
-        <SideNavItem :openSideNav="openSideNav" iconString="Liked" />
-        <SideNavItem :openSideNav="openSideNav" iconString="History" />
-        <SideNavItem :openSideNav="openSideNav" iconString="Watch Later" />
+        <SideNavItem v-if="$page.props.auth.user" :openSideNav="openSideNav" iconString="Subscription" />
+        <SideNavItem v-if="$page.props.auth.user" :openSideNav="openSideNav" iconString="Library" />
+        <SideNavItem v-if="$page.props.auth.user" :openSideNav="openSideNav" iconString="Liked" />
+        <SideNavItem v-if="$page.props.auth.user" :openSideNav="openSideNav" iconString="History" />
+        <SideNavItem v-if="$page.props.auth.user" :openSideNav="openSideNav" iconString="Watch Later" />
         <div v-if="openSideNav">
           <div class="border-b border-b-gray-700 my-2.5"></div>
           <div class="text-gray-400 text-[14px] text-extrabold">
@@ -137,15 +166,20 @@ const isNavOverlay = () => {
           :class="[!openSideNav ? 'p-2' : 'px-5 pb-2 pt-[7px]']"
           class="mt-[60px] w-full"
         >
-          <SideNavItem :openSideNav="openSideNav" iconString="Home" />
-          <SideNavItem :openSideNav="openSideNav" iconString="Add Video" />
-          <SideNavItem :openSideNav="openSideNav" iconString="Delete Video" />
+          <Link :href="route('home')">
+            <SideNavItem :openSideNav="openSideNav" iconString="Home" />
+          </Link>
+          <Link :href="route('addVideo')">
+            <SideNavItem v-if="$page.props.auth.user" :openSideNav="openSideNav" iconString="Add Video" />
+          </Link>
+          <Link :href="route('deleteVideo')">
+            <SideNavItem v-if="$page.props.auth.user" :openSideNav="openSideNav" iconString="Delete Video" />
+          </Link>
           <div class="border-b border-b-gray-700 my-2.5"></div>
-          <SideNavItem :openSideNav="openSideNav" iconString="Subscription" />
-          <SideNavItem :openSideNav="openSideNav" iconString="Library" />
-          <SideNavItem :openSideNav="openSideNav" iconString="Liked" />
-          <SideNavItem :openSideNav="openSideNav" iconString="History" />
-          <SideNavItem :openSideNav="openSideNav" iconString="Watch Later" />
+          <SideNavItem v-if="$page.props.auth.user" :openSideNav="openSideNav" iconString="Subscription" />
+          <SideNavItem v-if="$page.props.auth.user" :openSideNav="openSideNav" iconString="Liked" />
+          <SideNavItem v-if="$page.props.auth.user" :openSideNav="openSideNav" iconString="History" />
+          <SideNavItem v-if="$page.props.auth.user" :openSideNav="openSideNav" iconString="Watch Later" />
           <div v-if="openSideNav">
             <div class="border-b border-b-gray-700 my-2.5"></div>
             <div class="text-gray-400 text-[14px] text-extrabold">
@@ -190,7 +224,8 @@ const isNavOverlay = () => {
             <MenuIcon fillColor="#FFFFFF" :size="26" />
           </button>
           <div class="mx-2"></div>
-          <Link :href="route('home')"
+          <Link
+            :href="route('home')"
             class="flex text-white items-center justify-center mr-10 cursor-pointer"
           >
             <img src="/images/YT-logo.png" width="32" alt="" />
@@ -198,15 +233,21 @@ const isNavOverlay = () => {
           </Link>
         </div>
         <ul class="w-full px-5 py-2 p-2 mt-2">
-          <SideNavItem :openSideNav="true" iconString="Home" />
-          <SideNavItem :openSideNav="true" iconString="Add Video" />
-          <SideNavItem :openSideNav="openSideNav" iconString="Delete Video" />
+          <Link :href="route('home')">
+            <SideNavItem :openSideNav="openSideNav" iconString="Home" />
+          </Link>
+          <Link :href="route('addVideo')">
+            <SideNavItem v-if="$page.props.auth.user"  :openSideNav="true" iconString="Add Video" />
+          </Link>
+          <Link :href="route('deleteVideo')">
+            <SideNavItem  v-if="$page.props.auth.user" :openSideNav="openSideNav" iconString="Delete Video" />
+          </Link>
+
           <div class="border-b border-b-gray-700 my-2.5"></div>
-          <SideNavItem :openSideNav="true" iconString="Subscription" />
-          <SideNavItem :openSideNav="true" iconString="Library" />
-          <SideNavItem :openSideNav="true" iconString="Liked" />
-          <SideNavItem :openSideNav="true" iconString="History" />
-          <SideNavItem :openSideNav="true" iconString="Watch Later" />
+          <SideNavItem v-if="$page.props.auth.user"  :openSideNav="true" iconString="Subscription" />
+          <SideNavItem v-if="$page.props.auth.user"  :openSideNav="true" iconString="Liked" />
+          <SideNavItem v-if="$page.props.auth.user"  :openSideNav="true" iconString="History" />
+          <SideNavItem v-if="$page.props.auth.user"  :openSideNav="true" iconString="Watch Later" />
           <div v-if="openSideNav">
             <div class="border-b border-b-gray-700 my-2.5"></div>
             <div class="text-gray-400 text-[14px] text-extrabold">

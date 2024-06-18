@@ -19,15 +19,15 @@
           :src="thumbnail || ''"
           :class="
             (show
-              ? 'transition ease-in-out delay-150 rounded-l-lg'
+              ? 'transition ease-in-out delay-150 rounded-lg'
               : 'rounded-lg',
             showVideo ? 'delay-350 hidden' : '')
           "
           alt=""
-          class="aspect-video cursor-pointer"
+          class="aspect-video rounded-lg cursor-pointer"
         />
         <div
-          class="w-full h-full aspect-video cursor-pointer"
+          class="w-full h-full aspect-video  cursor-pointer"
           :class="showVideo ? '' : 'delay-350 hidden'"
         >
           <video ref="video" :src="videoUrl || ''" type="video/mp4" loop></video>

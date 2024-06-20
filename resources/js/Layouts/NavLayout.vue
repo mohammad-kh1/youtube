@@ -99,13 +99,7 @@ const isNavOverlay = () => {
           v-if="profile"
         >
           <h1>Username</h1>
-          <div class="border-b"></div>
-          <button
-            class="text-white mb-2  font-bold mt-2 rounded cursor-pointer"
-            type="submit"
-          >
-            Language
-          </button>
+
           <div class="border-b"></div>
           <Link v-if="$page.props.auth.user" href="/logout" method="post" as="button" type="button"
             >Logout</Link
